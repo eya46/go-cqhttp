@@ -3,7 +3,7 @@ package msg
 import (
 	"io"
 
-	"github.com/Mrs4s/MiraiGo/message"
+	"github.com/eya46/MiraiGo/message"
 )
 
 // Poke 拍一拍

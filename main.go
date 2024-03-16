@@ -2,19 +2,22 @@
 package main
 
 import (
-	"github.com/Mrs4s/go-cqhttp/cmd/gocq"
-	"github.com/Mrs4s/go-cqhttp/global/terminal"
+	"fmt"
+	"github.com/eya46/go-cqhttp/cmd/gocq"
+	"github.com/eya46/go-cqhttp/global/terminal"
+	"github.com/eya46/go-cqhttp/internal/base"
+	"time"
 
-	_ "github.com/Mrs4s/go-cqhttp/db/leveldb"   // leveldb 数据库支持
-	_ "github.com/Mrs4s/go-cqhttp/modules/silk" // silk编码模块
+	_ "github.com/eya46/go-cqhttp/db/leveldb"   // leveldb 数据库支持
+	_ "github.com/eya46/go-cqhttp/modules/silk" // silk编码模块
 	// 其他模块
-	// _ "github.com/Mrs4s/go-cqhttp/db/sqlite3"   // sqlite3 数据库支持
-	// _ "github.com/Mrs4s/go-cqhttp/db/mongodb"    // mongodb 数据库支持
-	// _ "github.com/Mrs4s/go-cqhttp/modules/pprof" // pprof 性能分析
+	// _ "github.com/eya46/go-cqhttp/db/sqlite3"   // sqlite3 数据库支持
+	// _ "github.com/eya46/go-cqhttp/db/mongodb"    // mongodb 数据库支持
+	// _ "github.com/eya46/go-cqhttp/modules/pprof" // pprof 性能分析
 )
 
 func main() {
-	terminal.SetTitle()
+	fmt.Printf("\033]0;go-cqhttp "+base.Version+" © 2020 - %d Mrs4s"+"\007", time.Now().Year())
 	gocq.InitBase()
 	gocq.PrepareData()
 	gocq.LoginInteract()

@@ -12,22 +12,22 @@ import (
 	"sync"
 	"time"
 
-	"github.com/Mrs4s/MiraiGo/binary"
-	"github.com/Mrs4s/MiraiGo/client"
-	"github.com/Mrs4s/MiraiGo/message"
-	"github.com/Mrs4s/MiraiGo/utils"
 	"github.com/RomiChan/syncx"
+	"github.com/eya46/MiraiGo/binary"
+	"github.com/eya46/MiraiGo/client"
+	"github.com/eya46/MiraiGo/message"
+	"github.com/eya46/MiraiGo/utils"
 	"github.com/pkg/errors"
 	"github.com/segmentio/asm/base64"
 	log "github.com/sirupsen/logrus"
 	"golang.org/x/image/webp"
 
-	"github.com/Mrs4s/go-cqhttp/db"
-	"github.com/Mrs4s/go-cqhttp/global"
-	"github.com/Mrs4s/go-cqhttp/internal/base"
-	"github.com/Mrs4s/go-cqhttp/internal/mime"
-	"github.com/Mrs4s/go-cqhttp/internal/msg"
-	"github.com/Mrs4s/go-cqhttp/pkg/onebot"
+	"github.com/eya46/go-cqhttp/db"
+	"github.com/eya46/go-cqhttp/global"
+	"github.com/eya46/go-cqhttp/internal/base"
+	"github.com/eya46/go-cqhttp/internal/mime"
+	"github.com/eya46/go-cqhttp/internal/msg"
+	"github.com/eya46/go-cqhttp/pkg/onebot"
 )
 
 // CQBot CQBot结构体,存储Bot实例相关配置
@@ -321,7 +321,7 @@ func (bot *CQBot) SendPrivateMessage(target int64, groupID int64, m *message.Sen
 	for _, e := range m.Elements {
 		switch i := e.(type) {
 		case *msg.Poke:
-			bot.Client.SendFriendPoke(i.Target)
+			bot.Client.SendFriendPoke(target, i.Target)
 			return 0
 		case *message.MusicShareElement:
 			bot.Client.SendFriendMusicShare(target, i)

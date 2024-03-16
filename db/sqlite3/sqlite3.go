@@ -2,6 +2,7 @@ package sqlite3
 
 import (
 	"encoding/base64"
+	"gopkg.in/yaml.v3"
 	"hash/crc64"
 	"os"
 	"path"
@@ -10,14 +11,12 @@ import (
 	"time"
 
 	sql "github.com/FloatTech/sqlite"
+	"github.com/eya46/MiraiGo/binary"
+	"github.com/eya46/MiraiGo/utils"
 	"github.com/pkg/errors"
 	log "github.com/sirupsen/logrus"
-	"gopkg.in/yaml.v3"
 
-	"github.com/Mrs4s/MiraiGo/binary"
-	"github.com/Mrs4s/MiraiGo/utils"
-
-	"github.com/Mrs4s/go-cqhttp/db"
+	"github.com/eya46/go-cqhttp/db"
 )
 
 type database struct {

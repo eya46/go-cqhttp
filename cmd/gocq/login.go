@@ -4,21 +4,21 @@ import (
 	"bufio"
 	"bytes"
 	"fmt"
+	"github.com/mattn/go-colorable"
 	"image"
 	"image/png"
 	"os"
 	"strings"
 	"time"
 
-	"github.com/Mrs4s/MiraiGo/client"
-	"github.com/Mrs4s/MiraiGo/utils"
-	"github.com/mattn/go-colorable"
+	"github.com/eya46/MiraiGo/client"
+	"github.com/eya46/MiraiGo/utils"
 	"github.com/pkg/errors"
 	log "github.com/sirupsen/logrus"
 	"gopkg.ilharper.com/x/isatty"
 
-	"github.com/Mrs4s/go-cqhttp/global"
-	"github.com/Mrs4s/go-cqhttp/internal/download"
+	"github.com/eya46/go-cqhttp/global"
+	"github.com/eya46/go-cqhttp/internal/download"
 )
 
 var console = bufio.NewReader(os.Stdin)
