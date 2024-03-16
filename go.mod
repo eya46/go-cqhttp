@@ -7,7 +7,7 @@ require (
 	github.com/Microsoft/go-winio v0.6.2-0.20230724192519-b29bbd58a65a
 	github.com/RomiChan/syncx v0.0.0-20221202055724-5f842c53020e
 	github.com/RomiChan/websocket v1.4.3-0.20220227141055-9b2c6168c9c5
-	github.com/eya46/MiraiGo v0.0.0-20240316133035-5c4460ba7457
+	github.com/eya46/MiraiGo v0.0.0-20240316142344-081794ba6fbc
 	github.com/fumiama/go-base16384 v1.7.0
 	github.com/fumiama/go-hide-param v0.1.4
 	github.com/lestrrat-go/file-rotatelogs v2.4.0+incompatible
