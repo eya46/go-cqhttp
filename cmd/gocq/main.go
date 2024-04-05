@@ -101,6 +101,7 @@ func PrepareData() {
 	cache.Init()
 
 	db.Init()
+	log.Infof("go-cqhttp "+base.Version+" © 2020 - %d Mrs4s", time.Now().Year())
 	if err := db.Open(); err != nil {
 		log.Fatalf("打开数据库失败: %v", err)
 	}

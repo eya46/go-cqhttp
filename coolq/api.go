@@ -572,8 +572,11 @@ func (bot *CQBot) CQGetGroupFilesByFolderID(groupID int64, folderID string) glob
 // https://docs.go-cqhttp.org/api/#%E8%8E%B7%E5%8F%96%E7%BE%A4%E6%96%87%E4%BB%B6%E8%B5%84%E6%BA%90%E9%93%BE%E6%8E%A5
 // @route(get_group_file_url)
 // @rename(bus_id->"[busid\x2Cbus_id].0")
-func (bot *CQBot) CQGetGroupFileURL(groupID int64, fileID string, busID int32) global.MSG {
-	url := bot.Client.GetGroupFileUrl(groupID, fileID, busID)
+func (bot *CQBot) CQGetGroupFileURL(groupID int64, fileID string, busID int32, fname string) global.MSG {
+	if fname == "" {
+		fname = fileID
+	}
+	url := bot.Client.GetGroupFileUrl(groupID, fileID, busID, fname)
 	if url == "" {
 		return Failed(100, "FILE_SYSTEM_API_ERROR")
 	}

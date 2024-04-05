@@ -158,7 +158,8 @@ func (c *Caller) call(action string, spec *onebot.Spec, p Getter) global.MSG {
 		p0 := p.Get("group_id").Int()
 		p1 := p.Get("file_id").String()
 		p2 := int32(p.Get("[busid,bus_id].0").Int())
-		return c.bot.CQGetGroupFileURL(p0, p1, p2)
+		p3 := p.Get("fname").String()
+		return c.bot.CQGetGroupFileURL(p0, p1, p2, p3)
 	case "get_group_files_by_folder":
 		p0 := p.Get("group_id").Int()
 		p1 := p.Get("folder_id").String()

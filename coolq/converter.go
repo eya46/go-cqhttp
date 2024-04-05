@@ -212,7 +212,16 @@ func toStringMessage(m []message.IMessageElement, source message.Source) string 
 	elems := toElements(m, source)
 	var sb strings.Builder
 	for _, elem := range elems {
-		elem.WriteCQCodeTo(&sb)
+		elem.WriteCQCodeTo(&sb, true)
+	}
+	return sb.String()
+}
+
+func toStringMessageNoEscape(m []message.IMessageElement, source message.Source) string {
+	elems := toElements(m, source)
+	var sb strings.Builder
+	for _, elem := range elems {
+		elem.WriteCQCodeTo(&sb, false)
 	}
 	return sb.String()
 }

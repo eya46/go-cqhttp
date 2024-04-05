@@ -78,9 +78,8 @@ func (bot *CQBot) privateMessageEvent(_ *client.QQClient, m *message.PrivateMess
 		SourceType: message.SourcePrivate,
 		PrimaryID:  m.Sender.Uin,
 	}
-	cqm := toStringMessage(m.Elements, source)
 	id := bot.InsertPrivateMessage(m, source)
-	log.Infof("收到好友 %v(%v) 的消息: %v (%v)", m.Sender.DisplayName(), m.Sender.Uin, cqm, id)
+	log.Infof("收到好友 %v(%v) 的消息: %v (%v)", m.Sender.DisplayName(), m.Sender.Uin, toStringMessageNoEscape(m.Elements, source), id)
 	typ := "message/private/friend"
 	if m.Sender.Uin == bot.Client.Uin {
 		typ = "message_sent/private/friend"
@@ -90,7 +89,7 @@ func (bot *CQBot) privateMessageEvent(_ *client.QQClient, m *message.PrivateMess
 		"user_id":     m.Sender.Uin,
 		"target_id":   m.Target,
 		"message":     ToFormattedMessage(m.Elements, source),
-		"raw_message": cqm,
+		"raw_message": toStringMessage(m.Elements, source),
 		"font":        0,
 		"sender": global.MSG{
 			"user_id":  m.Sender.Uin,
@@ -115,7 +114,7 @@ func (bot *CQBot) groupMessageEvent(c *client.QQClient, m *message.GroupMessage)
 					"name":  file.Name,
 					"size":  file.Size,
 					"busid": file.Busid,
-					"url":   c.GetGroupFileUrl(m.GroupCode, file.Path, file.Busid),
+					"url":   c.GetGroupFileUrl(m.GroupCode, file.Path, file.Busid, file.Name),
 				},
 			})
 			// return
@@ -125,9 +124,8 @@ func (bot *CQBot) groupMessageEvent(c *client.QQClient, m *message.GroupMessage)
 		SourceType: message.SourceGroup,
 		PrimaryID:  m.GroupCode,
 	}
-	cqm := toStringMessage(m.Elements, source)
 	id := bot.InsertGroupMessage(m, source)
-	log.Infof("收到群 %v(%v) 内 %v(%v) 的消息: %v (%v)", m.GroupName, m.GroupCode, m.Sender.DisplayName(), m.Sender.Uin, cqm, id)
+	log.Infof("收到群 %v(%v) 内 %v(%v) 的消息: %v (%v)", m.GroupName, m.GroupCode, m.Sender.DisplayName(), m.Sender.Uin, toStringMessageNoEscape(m.Elements, source), id)
 	gm := bot.formatGroupMessage(m)
 	if gm == nil {
 		return
@@ -143,7 +141,6 @@ func (bot *CQBot) tempMessageEvent(_ *client.QQClient, e *client.TempMessageEven
 		SourceType: message.SourcePrivate,
 		PrimaryID:  e.Session.Sender,
 	}
-	cqm := toStringMessage(m.Elements, source)
 	if base.AllowTempSession {
 		bot.tempSessionCache.Store(m.Sender.Uin, e.Session)
 	}
@@ -153,13 +150,13 @@ func (bot *CQBot) tempMessageEvent(_ *client.QQClient, e *client.TempMessageEven
 	// if bot.db != nil { // nolint
 	// 		id = bot.InsertTempMessage(m.Sender.Uin, m)
 	// }
-	log.Infof("收到来自群 %v(%v) 内 %v(%v) 的临时会话消息: %v", m.GroupName, m.GroupCode, m.Sender.DisplayName(), m.Sender.Uin, cqm)
+	log.Infof("收到来自群 %v(%v) 内 %v(%v) 的临时会话消息: %v", m.GroupName, m.GroupCode, m.Sender.DisplayName(), m.Sender.Uin, toStringMessageNoEscape(m.Elements, source))
 	tm := global.MSG{
 		"temp_source": e.Session.Source,
 		"message_id":  id,
 		"user_id":     m.Sender.Uin,
 		"message":     ToFormattedMessage(m.Elements, source),
-		"raw_message": cqm,
+		"raw_message": toStringMessage(m.Elements, source),
 		"font":        0,
 		"sender": global.MSG{
 			"user_id":  m.Sender.Uin,
@@ -184,7 +181,7 @@ func (bot *CQBot) guildChannelMessageEvent(c *client.QQClient, m *message.GuildC
 		PrimaryID:   int64(m.GuildId),
 		SecondaryID: int64(m.ChannelId),
 	}
-	log.Infof("收到来自频道 %v(%v) 子频道 %v(%v) 内 %v(%v) 的消息: %v", guild.GuildName, guild.GuildId, channel.ChannelName, m.ChannelId, m.Sender.Nickname, m.Sender.TinyId, toStringMessage(m.Elements, source))
+	log.Infof("收到来自频道 %v(%v) 子频道 %v(%v) 内 %v(%v) 的消息: %v", guild.GuildName, guild.GuildId, channel.ChannelName, m.ChannelId, m.Sender.Nickname, m.Sender.TinyId, toStringMessageNoEscape(m.Elements, source))
 	id := bot.InsertGuildChannelMessage(m)
 	ev := bot.event("message/guild/channel", global.MSG{
 		"guild_id":     fU64(m.GuildId),

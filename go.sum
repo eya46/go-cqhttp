@@ -25,6 +25,10 @@ github.com/eya46/MiraiGo v0.0.0-20240316133035-5c4460ba7457 h1:/zAZjmyCEA5Kyycy3
 github.com/eya46/MiraiGo v0.0.0-20240316133035-5c4460ba7457/go.mod h1:qRj1dp04lXpht1aKX7sM4wxclG/xeLhWvi97ePPwMqs=
 github.com/eya46/MiraiGo v0.0.0-20240316142344-081794ba6fbc h1:kHjD2jjiWgh+r0l+meD/nZosAmOnKz7IjTLNoK+nXWE=
 github.com/eya46/MiraiGo v0.0.0-20240316142344-081794ba6fbc/go.mod h1:qRj1dp04lXpht1aKX7sM4wxclG/xeLhWvi97ePPwMqs=
+github.com/eya46/MiraiGo v0.0.0-20240405105656-f1e75e130257 h1:T/n+IAWBX3l+3C44TAhF2eKVxDac0aC0QRJ4ia/uC4A=
+github.com/eya46/MiraiGo v0.0.0-20240405105656-f1e75e130257/go.mod h1:qRj1dp04lXpht1aKX7sM4wxclG/xeLhWvi97ePPwMqs=
+github.com/eya46/MiraiGo v0.0.0-20240405131524-d8b456eed9c2 h1:DKUOeSR+BdkYL9WNzWvcZOPkEVFeZAKhvDIy7uvyhSY=
+github.com/eya46/MiraiGo v0.0.0-20240405131524-d8b456eed9c2/go.mod h1:qRj1dp04lXpht1aKX7sM4wxclG/xeLhWvi97ePPwMqs=
 github.com/fsnotify/fsnotify v1.4.7/go.mod h1:jwhsz4b93w/PPRr/qN1Yymfu8t87LnFCMoQvtojpjFo=
 github.com/fumiama/go-base16384 v1.7.0 h1:6fep7XPQWxRlh4Hu+KsdH+6+YdUp+w6CwRXtMWSsXCA=
 github.com/fumiama/go-base16384 v1.7.0/go.mod h1:OEn+947GV5gsbTAnyuUW/SrfxJYUdYupSIQXOuGOcXM=

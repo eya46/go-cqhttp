@@ -113,12 +113,12 @@ func (e *Element) Get(k string) string {
 // CQCode convert element to cqcode
 func (e *Element) CQCode() string {
 	buf := strings.Builder{}
-	e.WriteCQCodeTo(&buf)
+	e.WriteCQCodeTo(&buf, true)
 	return buf.String()
 }
 
 // WriteCQCodeTo write element's cqcode into sb
-func (e *Element) WriteCQCodeTo(sb *strings.Builder) {
+func (e *Element) WriteCQCodeTo(sb *strings.Builder, escape bool) {
 	if e.Type == "text" {
 		sb.WriteString(EscapeText(e.Data[0].V)) // must be {"text": value}
 		return
@@ -129,7 +129,11 @@ func (e *Element) WriteCQCodeTo(sb *strings.Builder) {
 		sb.WriteByte(',')
 		sb.WriteString(data.K)
 		sb.WriteByte('=')
-		sb.WriteString(EscapeValue(data.V))
+		if escape {
+			sb.WriteString(EscapeValue(data.V))
+		} else {
+			sb.WriteString(data.V)
+		}
 	}
 	sb.WriteByte(']')
 }
