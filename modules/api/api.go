@@ -67,14 +67,6 @@ func (c *Caller) call(action string, spec *onebot.Spec, p Getter) global.MSG {
 		case "get_user_info":
 			p0 := p.Get("user_id").Int()
 			return c.bot.CQGetStrangerInfo(p0)
-		case "get_version":
-			return c.bot.CQGetVersion()
-		case "send_message":
-			p0 := p.Get("group_id").String()
-			p1 := p.Get("user_id").String()
-			p2 := p.Get("detail_type").String()
-			p3 := p.Get("message")
-			return c.bot.CQSendMessageV12(p0, p1, p2, p3)
 		}
 	}
 	switch action {
@@ -350,6 +342,9 @@ func (c *Caller) call(action string, spec *onebot.Spec, p Getter) global.MSG {
 		p2 := p.Get("role_id").Uint()
 		p3 := p.Get("users")
 		return c.bot.CQSetGuildMemberRole(p0, p1, p2, p3)
+	case "set_qq_online_status":
+		p0 := int(p.Get("status").Int())
+		return c.bot.CQSetOnlineStatus(p0)
 	case "set_qq_profile":
 		p0 := p.Get("nickname")
 		p1 := p.Get("company")

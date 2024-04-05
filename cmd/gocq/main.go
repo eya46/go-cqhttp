@@ -36,15 +36,6 @@ import (
 	"github.com/eya46/go-cqhttp/server"
 )
 
-// 允许通过配置文件设置的状态列表
-var allowStatus = [...]client.UserOnlineStatus{
-	client.StatusOnline, client.StatusAway, client.StatusInvisible, client.StatusBusy,
-	client.StatusListening, client.StatusConstellation, client.StatusWeather, client.StatusMeetSpring,
-	client.StatusTimi, client.StatusEatChicken, client.StatusLoving, client.StatusWangWang, client.StatusCookedRice,
-	client.StatusStudy, client.StatusStayUp, client.StatusPlayBall, client.StatusSignal, client.StatusStudyOnline,
-	client.StatusGaming, client.StatusVacationing, client.StatusWatchingTV, client.StatusFitness,
-}
-
 // InitBase 解析参数并检测
 //
 //	如果在 windows 下双击打开了程序，程序将在此函数释出脚本后终止；
@@ -395,11 +386,9 @@ func LoginInteract() {
 	log.Infof("开始加载群列表...")
 	global.Check(cli.ReloadGroupList(), true)
 	log.Infof("共加载 %v 个群.", len(cli.GroupList))
-	if uint(base.Account.Status) >= uint(len(allowStatus)) {
-		base.Account.Status = 0
-	}
-	cli.SetOnlineStatus(allowStatus[base.Account.Status])
-	servers.Run(coolq.NewQQBot(cli))
+	bot := coolq.NewQQBot(cli)
+	bot.CQSetOnlineStatus(base.Account.Status)
+	servers.Run(bot)
 	log.Info("资源初始化完成, 开始处理信息.")
 	log.Info("アトリは、高性能ですから!")
 }

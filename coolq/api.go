@@ -33,6 +33,8 @@ import (
 	"github.com/eya46/go-cqhttp/pkg/onebot"
 )
 
+//go:generate go run ../cmd/api-generator -pkg api -path=api.go -o ../modules/api/api.go
+
 type guildMemberPageToken struct {
 	guildID        uint64
 	nextIndex      uint32
@@ -2119,6 +2121,26 @@ func (bot *CQBot) CQSetQQProfile(nickname, company, email, college, personalNote
 	fi(college, u.College)
 	fi(personalNote, u.PersonalNote)
 	bot.Client.UpdateProfile(u)
+	return OK(nil)
+}
+
+// 允许通过配置文件设置的状态列表
+var allowStatus = [...]client.UserOnlineStatus{
+	client.StatusOnline, client.StatusAway, client.StatusInvisible, client.StatusBusy,
+	client.StatusListening, client.StatusConstellation, client.StatusWeather, client.StatusMeetSpring,
+	client.StatusTimi, client.StatusEatChicken, client.StatusLoving, client.StatusWangWang, client.StatusCookedRice,
+	client.StatusStudy, client.StatusStayUp, client.StatusPlayBall, client.StatusSignal, client.StatusStudyOnline,
+	client.StatusGaming, client.StatusVacationing, client.StatusWatchingTV, client.StatusFitness,
+}
+
+// CQSetOnlineStatus 设置 QQ 在线状态
+//
+// @route(set_qq_online_status)
+func (bot *CQBot) CQSetOnlineStatus(status int) global.MSG {
+	if uint(status) >= uint(len(allowStatus)) {
+		status = 0
+	}
+	bot.Client.SetOnlineStatus(allowStatus[status])
 	return OK(nil)
 }
 
